@@ -1,0 +1,19 @@
+h4 {
+  padding: 0;
+  margin: 0;
+}
+
+div.appointment {
+  padding: 1rem;
+  border: 1px solid #bbb;
+  border-radius: 1rem;
+}
+
+div.appointmentdata {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+div.appointmentdata > span {
+  text-align: right;
+}
