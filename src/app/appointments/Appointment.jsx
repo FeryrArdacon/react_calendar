@@ -2,7 +2,7 @@ import React, { useId } from "react";
 
 import "./Appointment.css";
 
-import { Label } from "./Label";
+import { Label } from "../common/Label";
 
 /**
  *

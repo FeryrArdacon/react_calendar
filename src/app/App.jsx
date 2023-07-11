@@ -2,7 +2,7 @@ import React from "react";
 
 import "./App.css";
 
-import { AppointmentList } from "./AppointmentList";
+import { AppointmentList } from "./appointments/AppointmentList";
 
 const appointments = [
   {
