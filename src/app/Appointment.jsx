@@ -4,6 +4,14 @@ import "./Appointment.css";
 
 import { Label } from "./Label";
 
+/**
+ *
+ * @param {Object} props
+ * @param {string} props.title
+ * @param {Date} props.datetime
+ * @param {Array<string>} props.participants
+ * @returns
+ */
 export const Appointment = ({ title, datetime, participants }) => {
   const dateId = useId();
   const timeId = useId();
