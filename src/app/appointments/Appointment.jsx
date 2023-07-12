@@ -28,7 +28,7 @@ export const Appointment = ({ title, datetime, participants }) => {
 
   return (
     <div className="appointment">
-      <h4>{title}</h4>
+      <h3>{title}</h3>
       <div className="appointmentdata">
         <Label text="Datum:" forId={dateId} />
         <span id={dateId}>{date}</span>
