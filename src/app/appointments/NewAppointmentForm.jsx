@@ -3,6 +3,7 @@ import React, { useState, useId } from "react";
 import "./NewAppointmentForm.css";
 
 import { Label } from "../common/Label";
+import { Placeholder } from "../common/Placeholder";
 
 const getDateISO = (date) => {
   const year = date.getFullYear();
@@ -74,7 +75,7 @@ export const NewAppointmentForm = ({ onSave }) => {
     <div>
       <form className="appointmentform">
         <h3>Neuen Termin anlegen</h3>
-        <span />
+        <Placeholder />
         <Label text="Titel:" forId={titleId} />
         <input
           id={titleId}
@@ -106,7 +107,7 @@ export const NewAppointmentForm = ({ onSave }) => {
           value={participantsText}
           onChange={handleParticipantsChange}
         />
-        <span></span>
+        <Placeholder />
         <button type="button" onClick={handleOnSave}>
           Speichern
         </button>
