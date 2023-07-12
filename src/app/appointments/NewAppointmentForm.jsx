@@ -4,15 +4,14 @@ import "./NewAppointmentForm.css";
 
 import { Label } from "../common/Label";
 
-/**
- *
- * @returns {{title:string,datetime:Date,participants:Array<string>}}
- */
-const createEmptyAppointment = () => ({
-  title: "",
-  datetime: new Date(),
-  participants: [],
-});
+const getDateISO = (date) => {
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const day = date.getDate();
+  return `${year}-${month >= 10 ? month : `0${month}`}-${
+    day >= 10 ? day : `0${day}`
+  }`;
+};
 
 /**
  *
@@ -24,13 +23,10 @@ export const NewAppointmentForm = ({ onSave }) => {
   const [title, setTitle] = useState("");
   /** @type {[Date,Function]} */
   const [datetime, setDatetime] = useState(new Date());
-  /** @type {[Array<string>,Function]} */
-  const [participants, setParticipants] = useState([]);
+  /** @type {[string,Function]} */
+  const [participantsText, setParticipantsText] = useState([]);
 
-  let participantstext = "";
-  if (participants.length > 1)
-    participantstext = participants.reduce((prev, next) => prev + ", " + next);
-  else if (participants.length === 1) participantstext = participants[0];
+  console.log(datetime);
 
   const titleId = useId();
   const dateId = useId();
@@ -39,56 +35,46 @@ export const NewAppointmentForm = ({ onSave }) => {
 
   const handleTitleChange = (event) => {
     const newTitle = event.target.value;
-
     setTitle(newTitle);
   };
 
   const handleDateChange = (event) => {
     /** @type {string} */
     const date = event.target.value;
-    const dateArray = date.split(".");
-    const dateIso = dateArray
-      .reverse()
-      .reduce((prev, next) => prev + "-" + next);
-
     setDatetime((actDate) => {
-      return new Date(
-        `${dateIso}T${actDate.getHours()}:${actDate.getMinutes()}`
-      );
+      return new Date(`${date}T${actDate.getHours()}:${actDate.getMinutes()}`);
     });
   };
 
   const handleTimeChange = (event) => {
     /** @type {string} */
     const time = event.target.value;
-
     setDatetime((actDate) => {
-      return new Date(
-        `${actDate.getFullYear()}-${actDate.getMonth()}-${actDate.getDate()}T${time}`
-      );
+      return new Date(`${getDateISO(actDate)}T${time}`);
     });
   };
 
   const handleParticipantsChange = (event) => {
     /** @type {string} */
     const newParticipantsText = event.target.value;
-
-    setParticipants(
-      newParticipantsText.split(",").map((participant) => participant.trim())
-    );
+    setParticipantsText(newParticipantsText);
   };
 
   const handleOnSave = () => {
     onSave({
       title,
       datetime,
-      participants,
+      participants: participantsText
+        .split(",")
+        .map((participant) => participant.trim()),
     });
   };
 
   return (
     <div>
       <form className="appointmentform">
+        <h3>Neuen Termin anlegen</h3>
+        <span />
         <Label text="Titel:" forId={titleId} />
         <input
           id={titleId}
@@ -100,7 +86,7 @@ export const NewAppointmentForm = ({ onSave }) => {
         <input
           id={dateId}
           type="date"
-          value={datetime.toLocaleDateString()}
+          value={getDateISO(datetime)}
           onChange={handleDateChange}
         />
         <Label text="Uhrzeit:" forId={timeId} />
@@ -117,11 +103,14 @@ export const NewAppointmentForm = ({ onSave }) => {
         <input
           id={participantsId}
           type="text"
-          value={participantstext}
+          value={participantsText}
           onChange={handleParticipantsChange}
         />
+        <span></span>
+        <button type="button" onClick={handleOnSave}>
+          Speichern
+        </button>
       </form>
-      <button onClick={handleOnSave}>Speichern</button>
     </div>
   );
 };

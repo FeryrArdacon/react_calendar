@@ -1,4 +1,9 @@
-ul.appointmentlist {
-  list-style-type: none;
-  padding: 2rem;
+div.appointmentlist {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  align-items: center;
+  justify-content: center;
+  grid-gap: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }

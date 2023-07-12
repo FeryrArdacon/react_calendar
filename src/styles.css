@@ -43,6 +43,10 @@
   }
 }
 
+html {
+  font-size: 16px;
+}
+
 /* Layout */
 article aside {
   background: var(--color-secondary-accent);

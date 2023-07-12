@@ -11,17 +11,21 @@ import { Appointment } from "./Appointment";
  * @returns
  */
 export const AppointmentList = ({ appointments }) => {
-  const appointmentListElements = appointments.map((appointment, index) => {
-    return (
-      <li key={`appointment-${index}`}>
-        <Appointment
-          title={appointment.title}
-          datetime={appointment.datetime}
-          participants={appointment.participants}
-        />
-      </li>
+  const appointmentListElements =
+    appointments.length > 0 ? (
+      appointments.map((appointment, index) => {
+        return (
+          <Appointment
+            key={`appointment-${index}`}
+            title={appointment.title}
+            datetime={appointment.datetime}
+            participants={appointment.participants}
+          />
+        );
+      })
+    ) : (
+      <em>Es sind keine Termine vorhanden.</em>
     );
-  });
 
-  return <ul className="appointmentlist">{appointmentListElements}</ul>;
+  return <div className="appointmentlist">{appointmentListElements}</div>;
 };
