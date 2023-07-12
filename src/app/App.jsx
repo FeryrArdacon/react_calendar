@@ -3,6 +3,7 @@ import React from "react";
 import "./App.css";
 
 import { AppointmentList } from "./appointments/AppointmentList";
+import { NewAppointmentForm } from "./appointments/NewAppointmentForm";
 
 const appointments = [
   {
@@ -33,10 +34,13 @@ const appointments = [
 ];
 
 export const App = () => {
+  const handleSaveNewAppointmant = () => {};
+
   return (
     <>
       <main>
         <h1>Terminkalender</h1>
+        <NewAppointmentForm onSave={handleSaveNewAppointmant} />
         <AppointmentList appointments={appointments} />
       </main>
     </>
